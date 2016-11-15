@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserInfo">
+
+    <resultMap id="UserInfo" type="com.jtl.model.UserInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"/>
+        <result column="user_token" property="userToken" jdbcType="VARCHAR"/>
+        <result column="user_realname" property="userRealname" jdbcType="VARCHAR"/>
+        <result column="user_sex" property="userSex" jdbcType="INTEGER"/>
+        <result column="user_photo" property="userPhoto" jdbcType="VARCHAR"/>
+        <result column="user_nickname" property="userNickname" jdbcType="VARCHAR"/>
+        <result column="user_idcard" property="userIdcard" jdbcType="VARCHAR"/>
+        <result column="user_birthday" property="userBirthday" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="user_pushID" property="userPushid" jdbcType="VARCHAR"/>
+        <result column="lock_date" property="lockDate" jdbcType="TIMESTAMP"/>
+        <result column="user_lock" property="userLock" jdbcType="BIT"/>
+        <result column="user_wrongNumber" property="userWrongnumber" jdbcType="INTEGER"/>
+        <result column="is_setpaypwd" property="isSetpaypwd" jdbcType="BIT"/>
+        <result column="is_Authentication" property="isAuthentication" jdbcType="INTEGER"/>
+        <result column="user_source" property="userSource" jdbcType="BIGINT"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
+        <result column="user_password_salt" property="userPasswordSalt" jdbcType="VARCHAR"/>
+        <result column="realname_Authentication_img" property="realnameAuthenticationImg" jdbcType="VARCHAR"/>
+        <result column="app_type" property="appType" jdbcType="VARCHAR"/>
+        <result column="is_setSecurity" property="isSetsecurity" jdbcType="BIT"/>
+        <result column="appeal_status" property="appealStatus" jdbcType="INTEGER"/>
+        <result column="is_openNoPay" property="isOpennopay" jdbcType="BIT"/>
+        <result column="device_id" property="deviceId" jdbcType="VARCHAR"/>
+        <result column="app_channel" property="appChannel" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columns">
+    id, user_name, email, password, create_time, address, status, user_password, user_token,
+    user_realname, user_sex, user_photo, user_nickname, user_idcard, user_birthday, user_phone,
+    user_pushID, lock_date, user_lock, user_wrongNumber, is_setpaypwd, is_Authentication,
+    user_source, salt, user_password_salt, realname_Authentication_img, app_type, is_setSecurity,
+    appeal_status, is_openNoPay,device_id
+    </sql>
+
+    <!-- 查询用户信息-->
+    <select id="selUserDetail" resultMap="UserInfo" parameterType="com.jtl.model.UserInfo">
+        select
+        <include refid="columns"/>
+        from `user_info` ui
+        WHERE 1 = 1
+
+        <if test="id != null">
+            and ui.`id` = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="userPhone != null">
+            and ui.`user_phone` = #{userPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="userToken != null">
+            and ui.`user_token` = #{userToken,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+
+    <!-- 添加用户 -->
+    <insert id="addUser" parameterType="com.jtl.model.UserInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+            <if test="userToken != null">
+                user_token,
+            </if>
+            <if test="userRealname != null">
+                user_realname,
+            </if>
+            <if test="userSex != null">
+                user_sex,
+            </if>
+            <if test="userPhoto != null">
+                user_photo,
+            </if>
+            <if test="userNickname != null">
+                user_nickname,
+            </if>
+            <if test="userIdcard != null">
+                user_idcard,
+            </if>
+            <if test="userBirthday != null">
+                user_birthday,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userPushid != null">
+                user_pushID,
+            </if>
+            <if test="lockDate != null">
+                lock_date,
+            </if>
+            <if test="userLock != null">
+                user_lock,
+            </if>
+            <if test="userWrongnumber != null">
+                user_wrongNumber,
+            </if>
+            <if test="isSetpaypwd != null">
+                is_setpaypwd,
+            </if>
+            <if test="isAuthentication != null">
+                is_Authentication,
+            </if>
+            <if test="userSource != null">
+                user_source,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="userPasswordSalt != null">
+                user_password_salt,
+            </if>
+            <if test="realnameAuthenticationImg != null">
+                realname_Authentication_img,
+            </if>
+            <if test="appType != null">
+                app_type,
+            </if>
+            <if test="isSetsecurity != null">
+                is_setSecurity,
+            </if>
+            <if test="appealStatus != null">
+                appeal_status,
+            </if>
+            <if test="isOpennopay != null">
+                is_openNoPay,
+            </if>
+            <if test="deviceId != null">
+                device_id,
+            </if>
+            <if test="appChannel != null">
+                app_channel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userToken != null">
+                #{userToken,jdbcType=VARCHAR},
+            </if>
+            <if test="userRealname != null">
+                #{userRealname,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                #{userSex,jdbcType=INTEGER},
+            </if>
+            <if test="userPhoto != null">
+                #{userPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="userNickname != null">
+                #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userIdcard != null">
+                #{userIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                #{userBirthday,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPushid != null">
+                #{userPushid,jdbcType=VARCHAR},
+            </if>
+            <if test="lockDate != null">
+                #{lockDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userLock != null">
+                #{userLock,jdbcType=BIT},
+            </if>
+            <if test="userWrongnumber != null">
+                #{userWrongnumber,jdbcType=INTEGER},
+            </if>
+            <if test="isSetpaypwd != null">
+                #{isSetpaypwd,jdbcType=BIT},
+            </if>
+            <if test="isAuthentication != null">
+                #{isAuthentication,jdbcType=INTEGER},
+            </if>
+            <if test="userSource != null">
+                #{userSource,jdbcType=BIGINT},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswordSalt != null">
+                #{userPasswordSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="realnameAuthenticationImg != null">
+                #{realnameAuthenticationImg,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="isSetsecurity != null">
+                #{isSetsecurity,jdbcType=BIT},
+            </if>
+            <if test="appealStatus != null">
+                #{appealStatus,jdbcType=INTEGER},
+            </if>
+            <if test="isOpennopay != null">
+                #{isOpennopay,jdbcType=BIT},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="appChannel != null">
+                #{appChannel,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

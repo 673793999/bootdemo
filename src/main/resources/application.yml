@@ -1,0 +1,33 @@
+
+jdbc:
+      name: root
+      url: jdbc:mysql://127.0.0.1:3306/demo_pro?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 123
+      driverClassName: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 10
+      initialSize: 2
+      maxWait: 3000
+      minIdle: 1
+      removeAbandoned: true
+      removeAbandonedTimeout: 180
+      connectionProperties: clientEncoding=UTF-8
+
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.jtl.model
+  configLocation: classpath:mybatis-config.xml
+
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: admin
+  maxIdle: 300
+  minIdle: 10
+  timeout: 20000
+  default.db: 1
+  maxTotal: 600
+  maxWait: 1000
